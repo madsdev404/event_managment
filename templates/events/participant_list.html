@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Participants</h1>
+    <a href="{% url 'participant_add' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Participant</a>
+    <ul class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for participant in participants %}
+            <li class="bg-white dark:bg-surface-dark p-4 rounded-lg shadow-md flex justify-between items-center">
+                <div>
+                    <a href="{% url 'participant_detail' participant.pk %}" class="text-blue-600 hover:underline text-lg font-semibold">{{ participant.name }}</a>
+                    <p class="text-gray-400 text-sm">{{ participant.email }}</p>
+                </div>
+                <div>
+                    <a href="{% url 'participant_edit' participant.pk %}" class="ml-2 text-green-600 hover:underline">Edit</a>
+                    <a href="{% url 'participant_delete' participant.pk %}" class="ml-2 text-red-600 hover:underline">Delete</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="col-span-full text-gray-400">No participants yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

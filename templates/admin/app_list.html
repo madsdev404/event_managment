@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% for app in app_list %}
+    <div class="app-{{ app.app_label }} module bg-surface dark:bg-surface-dark shadow-md rounded-lg mb-6">
+        <div class="flex justify-between items-center p-4 border-b border-border dark:border-border-dark">
+            <h2 class="text-xl font-bold text-text-primary dark:text-text-primary-dark">{% if app.app_url %}<a href="{{ app.app_url }}" class="text-text-primary dark:text-text-primary-dark hover:underline">{{ app.name }}</a>{% else %}{{ app.name }}{% endif %}</h2>
+        </div>
+        <div class="module-body p-4">
+            {% for model in app.models %}
+                <div class="model-{{ model.object_name|lower }} flex justify-between items-center py-2 border-b border-border dark:border-border-dark last:border-b-0">
+                    <h3 class="text-lg font-semibold text-text-primary dark:text-text-primary-dark">{% if model.admin_url %}<a href="{{ model.admin_url }}" class="text-blue-500 hover:underline">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}</h3>
+                    <div class="controls flex space-x-2">
+                        {% if model.add_url %}<a href="{{ model.add_url }}" class="text-green-500 hover:underline">{% translate 'Add' %}</a>{% endif %}
+                        {% if model.admin_url %}<a href="{{ model.admin_url }}" class="text-blue-500 hover:underline">{% translate 'Change' %}</a>{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
