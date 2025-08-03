@@ -8,7 +8,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("events.urls")),
-    path('', include('core.urls')),
 ]+debug_toolbar_urls()
 
 # Ctrl + Shift + P

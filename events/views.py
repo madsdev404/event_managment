@@ -120,6 +120,9 @@ class ParticipantDeleteView(DeleteView):
     template_name = 'events/participant_confirm_delete.html'
     success_url = reverse_lazy('participant_list')
 
+class HomeView(TemplateView):
+    template_name = 'events/home.html'
+
 class DashboardView(TemplateView):
     template_name = 'events/dashboard.html'
 
