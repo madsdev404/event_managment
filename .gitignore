@@ -12,7 +12,7 @@ venv/
 *.sqlite3
 db.sqlite3
 /media/
-/static/
+
 
 # IDEs
 .idea/
@@ -29,5 +29,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Tailwind CSS
-static/css/output.css
