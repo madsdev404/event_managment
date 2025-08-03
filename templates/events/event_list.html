@@ -5,7 +5,7 @@
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
         <a href="{% url 'event_add' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-auto text-center">Add Event</a>
         <form method="get" class="flex items-center w-full md:w-auto">
-            <input type="text" name="q" placeholder="Search events..." class="border p-2 rounded-l-md w-full" value="{{ request.GET.q }}">
+            <input type="text" name="q" placeholder="Search events..." class="border p-2 rounded-l-md w-full text-text-primary dark:text-text-primary-dark bg-surface dark:bg-surface-dark" value="{{ request.GET.q }}">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md">Search</button>
         </form>
     </div>
