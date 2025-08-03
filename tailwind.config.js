@@ -2,8 +2,9 @@
 module.exports = {
   darkMode: "class",
   content: [
-    "./templates/**/*.html", // Templates at the project level
-    "./**/templates/**/*.html", // Templates inside apps
+    "./templates/**/*.html",
+    "./events/templates/**/*.html",
+    "./core/templates/**/*.html",
   ],
   theme: {
     extend: {
