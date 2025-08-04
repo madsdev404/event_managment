@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'http://127.0.0.1:8000']
@@ -75,23 +75,23 @@ WSGI_APPLICATION = 'event_management.wsgi.application' # Updated
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event_management_db', # Updated database name
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://event_management_db_77h4_user:NtDzJGI8JLlRV0UjCzuqnfEJ4NCj5NpM@dpg-d27bcrggjchc73807j30-a.singapore-postgres.render.com/event_management_db_77h4',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'event_management_db',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://event_management_db_77h4_user:NtDzJGI8JLlRV0UjCzuqnfEJ4NCj5NpM@dpg-d27bcrggjchc73807j30-a.singapore-postgres.render.com/event_management_db_77h4',
+#         conn_max_age=600
+#     )
+# }
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

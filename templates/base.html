@@ -47,9 +47,19 @@
               >Categories</a
             >
             <a
-              href="{% url 'participant_list' %}"
-              class="{% if request.resolver_match.url_name == 'participant_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
-              >Participants</a
+              href="{% url 'dashboard' %}"
+              class="{% if request.resolver_match.url_name == 'dashboard' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
+              >Dashboard</a
+            >
+            <a
+              href="{% url 'event_list' %}"
+              class="{% if request.resolver_match.url_name == 'event_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
+              >Events</a
+            >
+            <a
+              href="{% url 'category_list' %}"
+              class="{% if request.resolver_match.url_name == 'category_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
+              >Categories</a
             >
             <a
               href="/admin/"
@@ -138,11 +148,6 @@
             >Categories</a
           >
           <a
-            href="{% url 'participant_list' %}"
-            class="block py-2 {% if request.resolver_match.url_name == 'participant_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
-            >Participants</a
-          >
-          <a
             href="/admin/"
             class="block py-2 text-text-muted dark:text-text-muted-dark hover:text-text-primary dark:hover:text-text-primary-dark"
             >Admin</a
@@ -183,13 +188,6 @@
                   href="{% url 'category_list' %}"
                   class="hover:text-primary dark:hover:text-primary-dark"
                   >Categories</a
-                >
-              </li>
-              <li>
-                <a
-                  href="{% url 'participant_list' %}"
-                  class="hover:text-primary dark:hover:text-primary-dark"
-                  >Participants</a
                 >
               </li>
             </ul>

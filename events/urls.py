@@ -2,8 +2,7 @@ from django.urls import path
 from .views import (
     CategoryListView, CategoryDetailView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView,
     EventListView, EventDetailView, EventCreateView, EventUpdateView, EventDeleteView,
-    ParticipantListView, ParticipantDetailView, ParticipantCreateView, ParticipantUpdateView, ParticipantDeleteView,
-    DashboardView, HomeView
+    AdminDashboardView, OrganizerDashboardView, ParticipantDashboardView, HomeView, rsvp_event, dashboard_redirect_view
 )
 
 urlpatterns = [
@@ -21,14 +20,11 @@ urlpatterns = [
     path('add/', EventCreateView.as_view(), name='event_add'), 
     path('<int:pk>/edit/', EventUpdateView.as_view(), name='event_edit'), 
     path('<int:pk>/delete/', EventDeleteView.as_view(), name='event_delete'),
+    path('event/<int:event_id>/rsvp/', rsvp_event, name='rsvp_event'),
     
-    # Participant URLs
-    path('participants/', ParticipantListView.as_view(), name='participant_list'),
-    path('participants/<int:pk>/', ParticipantDetailView.as_view(), name='participant_detail'),
-    path('participants/add/', ParticipantCreateView.as_view(), name='participant_add'),
-    path('participants/<int:pk>/edit/', ParticipantUpdateView.as_view(), name='participant_edit'),
-    path('participants/<int:pk>/delete/', ParticipantDeleteView.as_view(), name='participant_delete'),
-
-    # Dashboard URL
-    path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    # Dashboard URLs
+    path('dashboard/', dashboard_redirect_view, name='dashboard'),
+    path('admin_dashboard/', AdminDashboardView.as_view(), name='admin_dashboard'),
+    path('organizer_dashboard/', OrganizerDashboardView.as_view(), name='organizer_dashboard'),
+    path('participant_dashboard/', ParticipantDashboardView.as_view(), name='participant_dashboard'),
 ]
