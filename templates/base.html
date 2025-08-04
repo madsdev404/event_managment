@@ -47,25 +47,23 @@
               >Categories</a
             >
             <a
-              href="{% url 'dashboard' %}"
-              class="{% if request.resolver_match.url_name == 'dashboard' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
-              >Dashboard</a
-            >
-            <a
-              href="{% url 'event_list' %}"
-              class="{% if request.resolver_match.url_name == 'event_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
-              >Events</a
-            >
-            <a
-              href="{% url 'category_list' %}"
-              class="{% if request.resolver_match.url_name == 'category_list' %}text-primary dark:text-primary-dark{% else %}text-text-muted dark:text-text-muted-dark{% endif %} hover:text-text-primary dark:hover:text-text-primary-dark"
-              >Categories</a
-            >
-            <a
               href="/admin/"
               class="text-text-muted dark:text-text-muted-dark hover:text-text-primary dark:hover:text-text-primary-dark"
               >Admin</a
             >
+            {% if user.is_authenticated %}
+              <a
+                href="{% url 'logout' %}"
+                class="text-text-muted dark:text-text-muted-dark hover:text-text-primary dark:hover:text-text-primary-dark"
+                >Logout</a
+              >
+            {% else %}
+              <a
+                href="{% url 'login' %}"
+                class="text-text-muted dark:text-text-muted-dark hover:text-text-primary dark:hover:text-text-primary-dark"
+                >Login</a
+              >
+            {% endif %}
           </div>
           <div class="flex items-center gap-8">
             <button

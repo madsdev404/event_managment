@@ -8,121 +8,17 @@ from users.models import CustomUser
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from users.decorators import admin_required, organizer_required, participant_required
-
-# Category Views
-class CategoryListView(ListView):
-    model = Category
-    template_name = 'events/category_list.html'
-    context_object_name = 'categories'
-
-class CategoryDetailView(DetailView):
-    model = Category
-    template_name = 'events/category_detail.html'
-    context_object_name = 'category'
-
-@organizer_required
-class CategoryCreateView(CreateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'events/category_form.html'
-    success_url = reverse_lazy('category_list')
-
-@organizer_required
-class CategoryUpdateView(UpdateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'events/category_form.html'
-    success_url = reverse_lazy('category_list')
-
-@organizer_required
-class CategoryDeleteView(DeleteView):
-    model = Category
-    template_name = 'events/category_confirm_delete.html'
-    success_url = reverse_lazy('category_list')
-
-# Event Views
-from django.db.models import Q
-from datetime import date
-
-class EventListView(ListView):
-    model = Event
-    template_name = 'events/event_list.html'
-    context_object_name = 'events'
-
-    def get_queryset(self):
-        queryset = super().get_queryset().select_related('category').prefetch_related('participants')
-
-        # Search functionality
-        query = self.request.GET.get('q')
-        if query:
-            queryset = queryset.filter(Q(name__icontains=query) | Q(location__icontains=query))
-
-        # Filter by category
-        category_id = self.request.GET.get('category')
-        if category_id:
-            queryset = queryset.filter(category__id=category_id)
-
-        # Filter by date range
-        start_date_str = self.request.GET.get('start_date')
-        end_date_str = self.request.GET.get('end_date')
-
-        if start_date_str and end_date_str:
-            try:
-                start_date = date.fromisoformat(start_date_str)
-                end_date = date.fromisoformat(end_date_str)
-                queryset = queryset.filter(date__range=[start_date, end_date])
-            except ValueError:
-                # Handle invalid date format if necessary
-                pass
-
-        return queryset
-
-class EventDetailView(DetailView):
-    model = Event
-    template_name = 'events/event_detail.html'
-    context_object_name = 'event'
-
-@organizer_required
-class EventCreateView(CreateView):
-    model = Event
-    form_class = EventForm
-    template_name = 'events/event_form.html'
-    success_url = reverse_lazy('event_list')
-
-@organizer_required
-class EventUpdateView(UpdateView):
-    model = Event
-    form_class = EventForm
-    template_name = 'events/event_form.html'
-    success_url = reverse_lazy('event_list')
-
-@organizer_required
-class EventDeleteView(DeleteView):
-    model = Event
-    template_name = 'events/event_confirm_delete.html'
-    success_url = reverse_lazy('event_list')
-
-class HomeView(TemplateView):
-    template_name = 'events/home.html'
-
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.db.models import Count
-from datetime import date
-from django.urls import reverse_lazy
-from .models import Category, Event
-from .forms import CategoryForm, EventForm
-from users.models import CustomUser
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from users.decorators import admin_required, organizer_required, participant_required
 from django.utils.decorators import method_decorator
+from django.db.models import Q
 
 # Category Views
+@method_decorator(login_required, name='dispatch')
 class CategoryListView(ListView):
     model = Category
     template_name = 'events/category_list.html'
     context_object_name = 'categories'
 
+@method_decorator(login_required, name='dispatch')
 class CategoryDetailView(DetailView):
     model = Category
     template_name = 'events/category_detail.html'
@@ -153,9 +49,7 @@ class CategoryDeleteView(DeleteView):
     success_url = reverse_lazy('category_list')
 
 # Event Views
-from django.db.models import Q
-from datetime import date
-
+@method_decorator(login_required, name='dispatch')
 class EventListView(ListView):
     model = Event
     template_name = 'events/event_list.html'
@@ -189,6 +83,7 @@ class EventListView(ListView):
 
         return queryset
 
+@method_decorator(login_required, name='dispatch')
 class EventDetailView(DetailView):
     model = Event
     template_name = 'events/event_detail.html'
