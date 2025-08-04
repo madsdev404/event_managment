@@ -8,6 +8,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("events.urls")),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('users.urls')),
 ]+debug_toolbar_urls()
 
 # Ctrl + Shift + P

@@ -1,6 +1,6 @@
 # Event Management System
 
-## Assingment - 02
+## Assignment - 02
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![Django](https://img.shields.io/badge/Django-5.x-green.svg)

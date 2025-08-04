@@ -31,9 +31,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events', # New app
     'core',
+    'users',
     'widget_tweaks',
     'debug_toolbar', # Added for debugging
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 MIDDLEWARE = [
