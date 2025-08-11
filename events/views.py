@@ -118,7 +118,7 @@ class HomeView(TemplateView):
 
 @method_decorator(admin_required, name='dispatch')
 class AdminDashboardView(TemplateView):
-    template_name = 'events/dashboard.html' # Using the existing dashboard for now
+    template_name = 'events/admin_dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -152,22 +152,23 @@ class AdminDashboardView(TemplateView):
             events_display = Event.objects.all() # Default to all events
 
         context['events_display'] = events_display
+        context['categories'] = Category.objects.all()
 
         return context
 
 @method_decorator(organizer_required, name='dispatch')
 class OrganizerDashboardView(TemplateView):
-    template_name = 'events/dashboard.html' # Using the existing dashboard for now
+    template_name = 'events/organizer_dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['events'] = Event.objects.filter(organizer=self.request.user) # Assuming an 'organizer' field on Event
-        context['categories'] = Category.objects.filter(organizer=self.request.user) # Assuming an 'organizer' field on Category
+        context['events'] = Event.objects.filter(organizer=self.request.user)
+        context['categories'] = Category.objects.filter(organizer=self.request.user)
         return context
 
 @method_decorator(participant_required, name='dispatch')
 class ParticipantDashboardView(TemplateView):
-    template_name = 'events/dashboard.html' # Using the existing dashboard for now
+    template_name = 'events/participant_dashboard.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

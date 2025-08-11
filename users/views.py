@@ -34,6 +34,10 @@ def signup(request):
             email.send()
             messages.success(request, 'Please confirm your email address to complete the registration')
             return redirect('home')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{form.fields[field].label}: {error}")
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -65,7 +69,7 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     messages.info(request, f"You are now logged in as {username}.")
-                    return redirect('home') # Redirect to a dashboard or home page
+                    return redirect('dashboard')
                 else:
                     messages.error(request, "Your account is not active. Please check your email for activation link.")
             else:

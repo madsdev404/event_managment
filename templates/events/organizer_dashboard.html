@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Organizer Dashboard</h1>
+
+<!-- Management Actions -->
+<div class="mb-8">
+    <h2 class="text-xl font-bold mb-4">Management</h2>
+    <a href="{% url 'event_add' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Event</a>
+    <a href="{% url 'category_add' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create New Category</a>
+</div>
+
+<!-- Your Events Table -->
+<h2 class="text-xl font-bold mb-4">Your Events</h2>
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white dark:bg-surface-dark">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Name</th>
+                <th class="py-2 px-4 border-b">Date</th>
+                <th class="py-2 px-4 border-b">Location</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td class="py-2 px-4 border-b"><a href="{% url 'event_detail' event.pk %}" class="text-blue-500 hover:underline">{{ event.name }}</a></td>
+                <td class="py-2 px-4 border-b">{{ event.date }}</td>
+                <td class="py-2 px-4 border-b">{{ event.location }}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'event_edit' event.pk %}" class="text-yellow-500 hover:underline">Edit</a>
+                    <a href="{% url 'event_delete' event.pk %}" class="text-red-500 hover:underline ml-4">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="py-4 px-4 text-center text-gray-500">You have not created any events.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Your Categories Table -->
+<h2 class="text-xl font-bold mt-8 mb-4">Your Categories</h2>
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white dark:bg-surface-dark">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Name</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td class="py-2 px-4 border-b"><a href="{% url 'category_detail' category.pk %}" class="text-blue-500 hover:underline">{{ category.name }}</a></td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'category_edit' category.pk %}" class="text-yellow-500 hover:underline">Edit</a>
+                    <a href="{% url 'category_delete' category.pk %}" class="text-red-500 hover:underline ml-4">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2" class="py-4 px-4 text-center text-gray-500">You have not created any categories.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
